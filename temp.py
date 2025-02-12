@@ -9,6 +9,7 @@ dataset = pd.read_csv('tempo.csv')
 data_describe = dataset.describe()
 #boxplot com outlier em 1220
 sb.boxplot(dataset['Temperatura'])
+plt.title('Temperatura')
 plt.show()
 #ler a Tabela temperatuda do dataset
 data_temp = dataset['Temperatura']
@@ -18,11 +19,13 @@ moda_temp_s = mode(dataset['Temperatura'])
 dataset.loc[dataset['Temperatura'] == 1220, 'Temperatura'] = moda_temp_s
 #boxplot depois do ajuste
 sb.boxplot(dataset['Temperatura'])
+plt.title('Temperatura com Tratamento do Outlier')
 plt.show()
 #verificar se a valores nulls
 null_data = dataset['Umidade'].isnull().sum()
 #Boxplot para possivel outlier
 sb.boxplot(dataset['Umidade'])
+plt.title('Umidade')
 plt.show()
 #calcula a moda da coluna umidade
 colunm_umidade = mode(dataset['Umidade'])
@@ -31,6 +34,10 @@ dataset['Umidade'].fillna(colunm_umidade, inplace=True)
 #identificado outlier a 200, logo nao existiria, codigo altera esse valor
 #por o valor mais frequente
 dataset.loc[dataset['Umidade'] == 200, 'Umidade'] = colunm_umidade
+#Depois do tratamento do Otlier
+sb.boxplot(dataset['Umidade'])
+plt.title('Umidade com Tratamento do Outlier')
+plt.show()
 #Procura de valores nulos
 null_vento = dataset['Vento'].isnull().sum()
 #Calculo da moda coluna vento
